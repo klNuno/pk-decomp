@@ -15,7 +15,7 @@ make check-disk                         # disc against Redump, extract, executab
 make split                              # splat, alone
 make check                              # rebuild and compare
 ```
-The compiler, Metrowerks CodeWarrior for PS2 (MW MIPS C Compiler 2.4.1.01), is commercial and not downloaded: put your own `mwccps2.exe` in `tools/mwcc/2.4.1.01/`.
+The compiler, Metrowerks CodeWarrior for PS2 ("MW MIPS C Compiler (2.4.1.01)" in the executable, written by both the 2.4 and the 3.0.x builds), is commercial. `tools/setup.sh` fetches decomp.me's compiler kits into `tools/mwcc/<kit>/` for local use; they are never committed. The Makefile uses `mwcps2-3.0.1-020123` unless `MWCC_VER` says otherwise.
 
 ## Docs
 - [What the community already knows](docs/community-knowledge.md)

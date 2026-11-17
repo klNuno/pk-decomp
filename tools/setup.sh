@@ -34,6 +34,9 @@ if ! command -v mipsel-linux-gnu-as >/dev/null || [ -x "$T/bin/mipsel-linux-gnu-
 fi
 fetch "https://github.com/encounter/objdiff/releases/download/$OBJDIFF_TAG/objdiff-cli-linux-x86_64" "objdiff-cli-linux-x86_64-$OBJDIFF_TAG"
 fetch "https://github.com/decompals/wibo/releases/download/$WIBO_TAG/wibo-x86_64" "wibo-x86_64-$WIBO_TAG"
+for k in $MWCC_KITS; do
+  fetch "https://github.com/decompme/compilers/releases/download/compilers/$k.tar.gz" "$k.tar.gz"
+done
 
 if [ $LOCK = 1 ]; then (cd "$T/dl" && sha256sum -- *) > "$T/toolchain.sha256"; fi
 (cd "$T/dl" && sha256sum -c --quiet --ignore-missing ../toolchain.sha256)
@@ -57,6 +60,12 @@ if [ -n "${deb:-}" ]; then
 fi
 install -m 755 "$T/dl/objdiff-cli-linux-x86_64-$OBJDIFF_TAG" "$T/bin/objdiff-cli"
 install -m 755 "$T/dl/wibo-x86_64-$WIBO_TAG" "$T/bin/wibo"
+# Compiler kits: tools/mwcc/<kit>/mwccps2.exe (+ DLL, assembler), unpacked once from the checked archive.
+for k in $MWCC_KITS; do
+  if [ ! -f "$T/mwcc/$k/mwccps2.exe" ]; then
+    rm -rf "$T/mwcc/$k"; mkdir -p "$T/mwcc/$k"; tar -xzf "$T/dl/$k.tar.gz" -C "$T/mwcc/$k"
+  fi
+done
 
 git_pin https://github.com/matt-kempster/m2c "$M2C_REV" m2c
 git_pin https://github.com/simonlindholm/decomp-permuter "$PERMUTER_REV" decomp-permuter
@@ -82,7 +91,16 @@ echo "== toolchain"
 "$T/bin/objdiff-cli" --version
 printf 'wibo %s\n' "$WIBO_TAG"
 .venv/bin/python -c 'import importlib.metadata as m; print("splat64", m.version("splat64"), "spimdisasm", m.version("spimdisasm"), "pycdlib", m.version("pycdlib"))'
-for v in $MWCC_VERSIONS; do
-  if [ -f "$T/mwcc/$v/mwccps2.exe" ]; then echo "mwcc $v: present"; else echo "mwcc $v: missing (put your own mwccps2.exe and DLLs in $T/mwcc/$v/; needed from phase 2)"; fi
+# Each kit compiles a probe under wibo: "runs" or the exact error.
+probe=$(mktemp -d)
+printf 'extern int g(int);\nint f(int a, int b) { return g(a) * b + 3; }\n' > "$probe/p.c"
+for k in $MWCC_KITS; do
+  if out=$("$T/bin/wibo" "$T/mwcc/$k/mwccps2.exe" -c -nostdinc -o "$probe/p.o" "$probe/p.c" 2>&1) && [ -s "$probe/p.o" ]; then
+    echo "mwcc $k: runs"
+  else
+    echo "mwcc $k: fails: $(printf '%s' "$out" | tr '\n' ' ' | cut -c1-200)"
+  fi
+  rm -f "$probe/p.o"
 done
+rm -rf "$probe"
 echo "setup ok"

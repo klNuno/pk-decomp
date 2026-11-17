@@ -27,12 +27,15 @@ BUILD   := build/$(REGION)
 PYTHON  := .venv/bin/python
 SPLAT   := config/$(REGION)/splat.yaml
 
-# Metrowerks CodeWarrior for PS2, "MW MIPS C Compiler (2.4.1.01)" in the .comment of the EE executable
-# and of the game's IOP modules. mwccps2.exe is not shipped: put your own copy in tools/mwcc/<version>/.
-MWCC_VER ?= 2.4.1.01
+# Metrowerks CodeWarrior for PS2. The .comment says "MW MIPS C Compiler (2.4.1.01)", which the 2.4 and
+# 3.0.x kits all write; tools/setup.sh unpacks decomp.me's kits into tools/mwcc/<kit>/ (MWCC_KITS in
+# tools/versions.env). 3.0.1 is the first candidate: try another with make MWCC_VER=mwcps2-3.0-011126.
+MWCC_VER ?= mwcps2-3.0.1-020123
 MWCC     := tools/bin/wibo tools/mwcc/$(MWCC_VER)/mwccps2.exe
-# Flags are a guess until the calibration of phase 2.
-MWCCFLAGS ?= -c -nostdinc -Iinclude -O4 -sdatathreshold 8 -char unsigned
+# Candidate flags, to be measured in phase 1 on matched functions: the base set, then the game set.
+MWCC_BASEFLAGS ?= -c -g -opt level=3 -farcall off -sdatathreshold 8
+MWCC_GAMEFLAGS ?= -pragma "dividefix on" -inline deferred -O3,p
+MWCCFLAGS ?= $(MWCC_BASEFLAGS) $(MWCC_GAMEFLAGS) -nostdinc -Iinclude
 # tools/setup.sh installs wrappers in tools/bin/ when the system has no MIPS binutils.
 CROSS   := $(if $(wildcard tools/bin/mipsel-linux-gnu-as),tools/bin/,)mipsel-linux-gnu-
 AS      := $(CROSS)as
