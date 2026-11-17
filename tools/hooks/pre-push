@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Refuses a push unless the tree rebuilds the retail executable byte for byte (REGION=eu by default).
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+exe=$(make -s print-EXE)
+extract=$(make -s print-EXTRACT)
+splat=$(make -s print-SPLAT)
+ld=$(make -s print-LDSCRIPT)
+if [ ! -f "$extract/$exe" ]; then echo "pre-push: no $extract/$exe, skipping make check (run make check-disk)"; exit 0; fi
+if [ ! -f "$splat" ]; then echo "pre-push: no $splat yet, skipping make check"; exit 0; fi
+[ -f "$ld" ] || make -s split >/dev/null
+make -s check
