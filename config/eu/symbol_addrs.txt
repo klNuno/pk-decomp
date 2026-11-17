@@ -1,0 +1,3 @@
+// Names with evidence only. Format: name = 0xADDR; // type:func
+_start = 0x100008; // type:func  ELF entry point
+main = 0x129C60; // type:func  crt0 calls it with argc and argv, then passes its result to exit

@@ -1,0 +1,74 @@
+# splat config for SLES_507.73 (EU v1.01, built 2002-08-22). Layout read on this executable:
+# one PT_LOAD at file 0x80, vram 0x100000, filesz 0x25F800, memsz 0x6E4300, everything merged into one
+# unnamed PROGBITS section. crt0 at the entry 0x100008 clears 0x35F800..0x7E4300 (bss), sets gp to
+# 0x367370, then calls 0x129C60 with argc/argv. Code runs 0x100000..0x324524 (last jr ra 0x32451C),
+# zeros to 0x324580, then data (DMA packets first, strings around 0x330000..0x35F335) to 0x35F800.
+# After the segment, the file holds .shstrtab, .comment, .reginfo and the section headers.
+# Phase 1 keeps every function in asm; text chunks start at function starts about every 0x20000.
+name: Disney's Donald Duck PK (SLES-50773)
+sha1: 9122ebf3725e5e39d08d342552f4ea09ad223c5b
+options:
+  basename: pk
+  platform: ps2
+  compiler: MWCCPS2
+  base_path: ../..
+  target_path: extract/eu/SLES_507.73
+  asm_path: asm/eu
+  asset_path: assets/eu
+  src_path: src
+  build_path: build/eu
+  ld_script_path: linker/eu/pk.ld
+  symbol_addrs_path:
+    - config/eu/symbol_addrs.txt
+  undefined_funcs_auto_path: linker/eu/undefined_funcs_auto.txt
+  undefined_syms_auto_path: linker/eu/undefined_syms_auto.txt
+
+  gp_value: 0x367370
+  ld_gp_expression: "0x367370"
+  find_file_boundaries: False
+  disassemble_all: True
+  o_as_suffix: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_end_label: endlabel
+
+  section_order: [".text", ".data", ".rodata", ".sdata", ".sbss", ".bss"]
+  subalign: null
+  ld_bss_is_noload: True
+  ld_align_section_vram_end: False
+  ld_align_segment_vram_end: False
+
+segments:
+  - [0x0, bin, elf_header]
+
+  - name: main
+    type: code
+    start: 0x80
+    vram: 0x100000
+    bss_size: 0x484B00
+    subsegments:
+      - [0x80, asm, text_100000]
+      - [0x20230, asm, text_1201b0]
+      - [0x402C0, asm, text_140240]
+      - [0x60410, asm, text_160390]
+      - [0x80590, asm, text_180510]
+      - [0xA0790, asm, text_1a0710]
+      - [0xC0850, asm, text_1c07d0]
+      - [0xE0CD0, asm, text_1e0c50]
+      - [0x100F30, asm, text_200eb0]
+      - [0x120FC0, asm, text_220f40]
+      - [0x141020, asm, text_240fa0]
+      - [0x161100, asm, text_261080]
+      - [0x181150, asm, text_2810d0]
+      - [0x1A11A0, asm, text_2a1120]
+      - [0x1C16D0, asm, text_2c1650]
+      - [0x1E17B0, asm, text_2e1730]
+      - [0x201820, asm, text_3017a0]
+      - [0x221900, asm, text_321880]
+      - [0x224600, data, data_324580]
+      - { start: 0x25F880, type: bss, vram: 0x35F800, name: bss_35F800 }
+
+  - [0x25F880, bin, elf_tail]
+  - [0x25FA30]

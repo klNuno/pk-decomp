@@ -5,7 +5,7 @@ A matching decompilation of Disney's PK: Out of the Shadows (PlayStation 2, Ubi 
 No game data is in this repository: build it from your own disc (`disks/README.md`).
 
 ## Status
-Phase 0: tooling and research. No executable split yet.
+Phase 1: the EU executable (SLES_507.73) splits with splat and rebuilds byte for byte from assembly (7754 functions, none in C yet). Compiler kit: CodeWarrior PS2 3.0.3.
 
 ## Build
 ```sh
