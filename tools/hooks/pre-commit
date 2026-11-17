@@ -12,7 +12,10 @@ while IFS= read -r -d '' f; do
     disks/*|extract/*|asm/*|assets/*|build/*|expected/*|captures/*|linker/*|work/*|tools/dl/*|tools/bin/*|tools/binutils/*|tools/mwcc/*|tools/src/*)
       echo "game data or toolchain staged: $f"; fail=1 ;;
   esac
-  if printf '%s' "$f" | grep -qiE "$data_re"; then echo "game file type staged: $f"; fail=1; fi
+  # Small PNG screenshots for the findings in docs/discoveries.md are the one allowed image type.
+  if printf '%s' "$f" | grep -qE '^docs/img/game/[A-Za-z0-9_-]+\.png$'; then
+    if [ "$(git cat-file -s ":$f" 2>/dev/null || echo 0)" -gt 204800 ]; then echo "screenshot over 200 KB: $f"; fail=1; fi
+  elif printf '%s' "$f" | grep -qiE "$data_re"; then echo "game file type staged: $f"; fail=1; fi
   size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
   if [ "$size" -gt 1048576 ]; then echo "file over 1 MB staged: $f"; fail=1; fi
   # An ELF or IRX under any name: the four magic bytes 7f 45 4c 46.
