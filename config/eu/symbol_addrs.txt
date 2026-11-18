@@ -1,3 +1,4 @@
 // Names with evidence only. Format: name = 0xADDR; // type:func
 _start = 0x100008; // type:func  ELF entry point
 main = 0x129C60; // type:func  crt0 calls it with argc and argv, then passes its result to exit
+func_00285EB0 = 0x285EB0; // type:func  start of a function: splat merged it into the stub at 0x285EA0 (prologue at 0x285EB0, no gap)

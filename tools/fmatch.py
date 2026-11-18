@@ -156,10 +156,11 @@ def cmd_m2c(a):
 
 
 def disasm(data, addr, names):
-    path = os.path.join(ROOT, "build/fmatch", "_dis.bin")
+    path = os.path.join(ROOT, "build/fmatch", f"_dis.{os.getpid()}.bin")
     open(path, "wb").write(data)
     r = run([f"{BIN}/mipsel-linux-gnu-objdump", "-D", "-b", "binary", "-m", "mips:5900", "-EL",
              f"--adjust-vma=0x{addr:X}", path])
+    os.remove(path)
     rows = []
     for line in r.stdout.splitlines():
         m = re.match(r"\s*([0-9a-f]+):\s+([0-9a-f]{8})\s+(.*)", line)
