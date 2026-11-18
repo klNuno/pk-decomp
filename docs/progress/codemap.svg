@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 873" font-family="system-ui, sans-serif"><rect width="100%" height="100%" fill="#1a1a19"/><text x="64" y="30" font-size="18" font-weight="600" fill="#f0efec">PK: Out of the Shadows, EU executable: 29.51 % of game code in C</text><text x="64" y="52" font-size="12" fill="#a9a79c">5040 of 6550 game functions (585,712 of 1,984,640 bytes), one row per 32 KB in address order; 1212 library functions apart</text><text x="56" y="78" text-anchor="end" font-size="9" fill="#a9a79c">100000</text><text x="56" y="122" text-anchor="end" font-size="9" fill="#a9a79c">120000</text><text x="56" y="166" text-anchor="end" font-size="9" fill="#a9a79c">140000</text><text x="56" y="210" text-anchor="end" font-size="9" fill="#a9a79c">160000</text><text x="56" y="254" text-anchor="end" font-size="9" fill="#a9a79c">180000</text><text x="56" y="298" text-anchor="end" font-size="9" fill="#a9a79c">1A0000</text><text x="56" y="342" text-anchor="end" font-size="9" fill="#a9a79c">1C0000</text><text x="56" y="386" text-anchor="end" font-size="9" fill="#a9a79c">1E0000</text><text x="56" y="430" text-anchor="end" font-size="9" fill="#a9a79c">200000</text><text x="56" y="474" text-anchor="end" font-size="9" fill="#a9a79c">220000</text><text x="56" y="518" text-anchor="end" font-size="9" fill="#a9a79c">240000</text><text x="56" y="562" text-anchor="end" font-size="9" fill="#a9a79c">260000</text><text x="56" y="606" text-anchor="end" font-size="9" fill="#a9a79c">280000</text><text x="56" y="650" text-anchor="end" font-size="9" fill="#a9a79c">2A0000</text><text x="56" y="694" text-anchor="end" font-size="9" fill="#a9a79c">2C0000</text><text x="56" y="738" text-anchor="end" font-size="9" fill="#a9a79c">2E0000</text><text x="56" y="782" text-anchor="end" font-size="9" fill="#a9a79c">300000</text><text x="56" y="826" text-anchor="end" font-size="9" fill="#a9a79c">320000</text><rect x="64.00" y="70" width="960.00" height="9" fill="#2c2b29"></rect>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 873" font-family="system-ui, sans-serif"><rect width="100%" height="100%" fill="#1a1a19"/><text x="64" y="30" font-size="18" font-weight="600" fill="#f0efec">PK: Out of the Shadows, EU executable: 29.88 % of game code in C</text><text x="64" y="52" font-size="12" fill="#a9a79c">5056 of 6550 game functions (592,912 of 1,984,640 bytes), one row per 32 KB in address order; 1212 library functions apart</text><text x="56" y="78" text-anchor="end" font-size="9" fill="#a9a79c">100000</text><text x="56" y="122" text-anchor="end" font-size="9" fill="#a9a79c">120000</text><text x="56" y="166" text-anchor="end" font-size="9" fill="#a9a79c">140000</text><text x="56" y="210" text-anchor="end" font-size="9" fill="#a9a79c">160000</text><text x="56" y="254" text-anchor="end" font-size="9" fill="#a9a79c">180000</text><text x="56" y="298" text-anchor="end" font-size="9" fill="#a9a79c">1A0000</text><text x="56" y="342" text-anchor="end" font-size="9" fill="#a9a79c">1C0000</text><text x="56" y="386" text-anchor="end" font-size="9" fill="#a9a79c">1E0000</text><text x="56" y="430" text-anchor="end" font-size="9" fill="#a9a79c">200000</text><text x="56" y="474" text-anchor="end" font-size="9" fill="#a9a79c">220000</text><text x="56" y="518" text-anchor="end" font-size="9" fill="#a9a79c">240000</text><text x="56" y="562" text-anchor="end" font-size="9" fill="#a9a79c">260000</text><text x="56" y="606" text-anchor="end" font-size="9" fill="#a9a79c">280000</text><text x="56" y="650" text-anchor="end" font-size="9" fill="#a9a79c">2A0000</text><text x="56" y="694" text-anchor="end" font-size="9" fill="#a9a79c">2C0000</text><text x="56" y="738" text-anchor="end" font-size="9" fill="#a9a79c">2E0000</text><text x="56" y="782" text-anchor="end" font-size="9" fill="#a9a79c">300000</text><text x="56" y="826" text-anchor="end" font-size="9" fill="#a9a79c">320000</text><rect x="64.00" y="70" width="960.00" height="9" fill="#2c2b29"></rect>
 <rect x="64.00" y="81" width="960.00" height="9" fill="#2c2b29"></rect>
 <rect x="64.00" y="92" width="960.00" height="9" fill="#2c2b29"></rect>
 <rect x="64.00" y="103" width="960.00" height="9" fill="#2c2b29"></rect>
@@ -13,7 +13,8 @@
 <rect x="296.97" y="125" width="1.05" height="9" fill="#3fa35a"><title>SetPal60 0x129F10 36 bytes</title></rect>
 <rect x="298.38" y="125" width="1.05" height="9" fill="#3fa35a"><title>SetPal50 0x129F40 36 bytes</title></rect>
 <rect x="299.78" y="125" width="3.05" height="9" fill="#3fa35a"><title>func_00129F70 0x129F70 104 bytes</title></rect>
-<rect x="303.06" y="125" width="37.85" height="9" fill="#4a4f57"></rect>
+<rect x="303.06" y="125" width="13.36" height="9" fill="#3fa35a"><title>func_00129FE0 0x129FE0 456 bytes</title></rect>
+<rect x="316.66" y="125" width="24.26" height="9" fill="#4a4f57"></rect>
 <rect x="341.03" y="125" width="9.61" height="9" fill="#3fa35a"><title>func_0012A4F0 0x12A4F0 328 bytes</title></rect>
 <rect x="350.88" y="125" width="29.77" height="9" fill="#4a4f57"></rect>
 <rect x="380.88" y="125" width="8.32" height="9" fill="#3fa35a"><title>func_0012AA40 0x12AA40 284 bytes</title></rect>
@@ -388,7 +389,7 @@
 <rect x="700.56" y="191" width="35.27" height="9" fill="#4a4f57"></rect>
 <rect x="736.19" y="191" width="8.20" height="9" fill="#3fa35a"><title>func_0015D9A0 0x15D9A0 280 bytes</title></rect>
 <rect x="744.62" y="191" width="8.32" height="9" fill="#3fa35a"><title>func_0015DAC0 0x15DAC0 284 bytes</title></rect>
-<rect x="753.06" y="191" width="13.24" height="9" fill="#4a4f57"></rect>
+<rect x="753.06" y="191" width="13.24" height="9" fill="#3fa35a"><title>func_0015DBE0 0x15DBE0 452 bytes</title></rect>
 <rect x="766.66" y="191" width="0.60" height="9" fill="#3fa35a"><title>func_0015DDB0 0x15DDB0 8 bytes</title></rect>
 <rect x="767.12" y="191" width="0.60" height="9" fill="#3fa35a"><title>func_0015DDC0 0x15DDC0 8 bytes</title></rect>
 <rect x="767.59" y="191" width="3.87" height="9" fill="#3fa35a"><title>func_0015DDD0 0x15DDD0 132 bytes</title></rect>
@@ -535,7 +536,7 @@
 <rect x="722.12" y="202" width="0.60" height="9" fill="#3fa35a"><title>func_001657C0 0x1657C0 8 bytes</title></rect>
 <rect x="722.59" y="202" width="5.27" height="9" fill="#3fa35a"><title>func_001657D0 0x1657D0 180 bytes</title></rect>
 <rect x="728.22" y="202" width="5.27" height="9" fill="#3fa35a"><title>func_00165890 0x165890 180 bytes</title></rect>
-<rect x="733.84" y="202" width="13.12" height="9" fill="#4a4f57"></rect>
+<rect x="733.84" y="202" width="13.12" height="9" fill="#3fa35a"><title>func_00165950 0x165950 448 bytes</title></rect>
 <rect x="746.97" y="202" width="0.60" height="9" fill="#3fa35a"><title>func_00165B10 0x165B10 8 bytes</title></rect>
 <rect x="747.44" y="202" width="6.33" height="9" fill="#3fa35a"><title>func_00165B20 0x165B20 216 bytes</title></rect>
 <rect x="754.00" y="202" width="2.34" height="9" fill="#3fa35a"><title>func_00165C00 0x165C00 80 bytes</title></rect>
@@ -573,12 +574,13 @@
 <rect x="877.75" y="202" width="4.45" height="9" fill="#3fa35a"><title>func_00166C80 0x166C80 152 bytes</title></rect>
 <rect x="882.44" y="202" width="8.91" height="9" fill="#3fa35a"><title>func_00166D20 0x166D20 304 bytes</title></rect>
 <rect x="891.34" y="202" width="4.10" height="9" fill="#3fa35a"><title>func_00166E50 0x166E50 140 bytes</title></rect>
-<rect x="895.56" y="202" width="13.12" height="9" fill="#4a4f57"></rect>
+<rect x="895.56" y="202" width="13.12" height="9" fill="#3fa35a"><title>func_00166EE0 0x166EE0 448 bytes</title></rect>
 <rect x="908.69" y="202" width="0.60" height="9" fill="#3fa35a"><title>func_001670A0 0x1670A0 8 bytes</title></rect>
 <rect x="909.16" y="202" width="0.60" height="9" fill="#3fa35a"><title>func_001670B0 0x1670B0 8 bytes</title></rect>
 <rect x="909.62" y="202" width="4.45" height="9" fill="#4a4f57"></rect>
 <rect x="914.31" y="202" width="8.67" height="9" fill="#3fa35a"><title>func_00167160 0x167160 296 bytes</title></rect>
-<rect x="923.22" y="202" width="30.23" height="9" fill="#4a4f57"></rect>
+<rect x="923.22" y="202" width="13.12" height="9" fill="#3fa35a"><title>func_00167290 0x167290 448 bytes</title></rect>
+<rect x="936.34" y="202" width="17.11" height="9" fill="#4a4f57"></rect>
 <rect x="953.69" y="202" width="1.99" height="9" fill="#3fa35a"><title>func_001676A0 0x1676A0 68 bytes</title></rect>
 <rect x="956.03" y="202" width="25.31" height="9" fill="#4a4f57"></rect>
 <rect x="981.34" y="202" width="0.70" height="9" fill="#3fa35a"><title>func_00167A50 0x167A50 24 bytes</title></rect>
@@ -649,7 +651,9 @@
 <rect x="281.97" y="213" width="1.88" height="9" fill="#3fa35a"><title>func_00169D10 0x169D10 64 bytes</title></rect>
 <rect x="283.84" y="213" width="21.56" height="9" fill="#4a4f57"></rect>
 <rect x="305.41" y="213" width="2.81" height="9" fill="#3fa35a"><title>func_0016A030 0x16A030 96 bytes</title></rect>
-<rect x="308.22" y="213" width="131.02" height="9" fill="#4a4f57"></rect>
+<rect x="308.22" y="213" width="110.98" height="9" fill="#4a4f57"></rect>
+<rect x="419.31" y="213" width="13.36" height="9" fill="#3fa35a"><title>func_0016AF60 0x16AF60 456 bytes</title></rect>
+<rect x="432.91" y="213" width="6.33" height="9" fill="#4a4f57"></rect>
 <rect x="439.47" y="213" width="0.60" height="9" fill="#3fa35a"><title>func_0016B210 0x16B210 8 bytes</title></rect>
 <rect x="439.94" y="213" width="18.16" height="9" fill="#4a4f57"></rect>
 <rect x="458.22" y="213" width="2.11" height="9" fill="#3fa35a"><title>func_0016B490 0x16B490 72 bytes</title></rect>
@@ -786,7 +790,9 @@
 <rect x="192.44" y="246" width="106.41" height="9" fill="#4a4f57"></rect>
 <rect x="298.84" y="246" width="5.62" height="9" fill="#3fa35a"><title>func_00181F50 0x181F50 192 bytes</title></rect>
 <rect x="304.47" y="246" width="0.60" height="9" fill="#3fa35a"><title>func_00182010 0x182010 8 bytes</title></rect>
-<rect x="304.94" y="246" width="259.34" height="9" fill="#4a4f57"></rect>
+<rect x="304.94" y="246" width="113.79" height="9" fill="#4a4f57"></rect>
+<rect x="418.84" y="246" width="13.24" height="9" fill="#3fa35a"><title>func_00182F50 0x182F50 452 bytes</title></rect>
+<rect x="432.44" y="246" width="131.84" height="9" fill="#4a4f57"></rect>
 <rect x="564.62" y="246" width="6.91" height="9" fill="#3fa35a"><title>func_001842C0 0x1842C0 236 bytes</title></rect>
 <rect x="571.66" y="246" width="452.34" height="9" fill="#4a4f57"></rect>
 <rect x="64.00" y="257" width="122.34" height="9" fill="#4a4f57"></rect>
@@ -1310,7 +1316,8 @@
 <rect x="1007.59" y="301" width="12.54" height="9" fill="#3fa35a"><title>func_001AFDD0 0x1AFDD0 428 bytes</title></rect>
 <rect x="1020.25" y="301" width="3.75" height="9" fill="#3fa35a"><title>func_001AFF80 0x1AFF80 420 bytes</title></rect>
 <rect x="64.00" y="312" width="8.55" height="9" fill="#3fa35a"><title>func_001AFF80 0x1AFF80 420 bytes</title></rect>
-<rect x="72.91" y="312" width="31.17" height="9" fill="#4a4f57"></rect>
+<rect x="72.91" y="312" width="13.12" height="9" fill="#3fa35a"><title>func_001B0130 0x1B0130 448 bytes</title></rect>
+<rect x="86.03" y="312" width="18.05" height="9" fill="#4a4f57"></rect>
 <rect x="104.31" y="312" width="5.04" height="9" fill="#3fa35a"><title>func_001B0560 0x1B0560 172 bytes</title></rect>
 <rect x="109.47" y="312" width="24.61" height="9" fill="#4a4f57"></rect>
 <rect x="134.31" y="312" width="0.82" height="9" fill="#3fa35a"><title>func_001B0960 0x1B0960 28 bytes</title></rect>
@@ -1706,7 +1713,7 @@
 <rect x="658.84" y="334" width="1.29" height="9" fill="#3fa35a"><title>func_001C4F50 0x1C4F50 44 bytes</title></rect>
 <rect x="660.25" y="334" width="1.17" height="9" fill="#3fa35a"><title>func_001C4F80 0x1C4F80 40 bytes</title></rect>
 <rect x="661.66" y="334" width="1.88" height="9" fill="#3fa35a"><title>func_001C4FB0 0x1C4FB0 64 bytes</title></rect>
-<rect x="663.53" y="334" width="13.24" height="9" fill="#4a4f57"></rect>
+<rect x="663.53" y="334" width="13.24" height="9" fill="#3fa35a"><title>func_001C4FF0 0x1C4FF0 452 bytes</title></rect>
 <rect x="677.12" y="334" width="3.75" height="9" fill="#3fa35a"><title>func_001C51C0 0x1C51C0 128 bytes</title></rect>
 <rect x="680.88" y="334" width="3.98" height="9" fill="#3fa35a"><title>func_001C5240 0x1C5240 136 bytes</title></rect>
 <rect x="685.09" y="334" width="1.76" height="9" fill="#3fa35a"><title>func_001C52D0 0x1C52D0 60 bytes</title></rect>
@@ -1915,7 +1922,7 @@
 <rect x="883.84" y="356" width="4.22" height="9" fill="#3fa35a"><title>func_001D6D50 0x1D6D50 144 bytes</title></rect>
 <rect x="888.06" y="356" width="25.20" height="9" fill="#4a4f57"></rect>
 <rect x="913.38" y="356" width="2.23" height="9" fill="#3fa35a"><title>func_001D7140 0x1D7140 76 bytes</title></rect>
-<rect x="915.72" y="356" width="13.24" height="9" fill="#4a4f57"></rect>
+<rect x="915.72" y="356" width="13.24" height="9" fill="#3fa35a"><title>func_001D7190 0x1D7190 452 bytes</title></rect>
 <rect x="929.31" y="356" width="2.93" height="9" fill="#3fa35a"><title>func_001D7360 0x1D7360 100 bytes</title></rect>
 <rect x="932.59" y="356" width="5.74" height="9" fill="#4a4f57"></rect>
 <rect x="938.69" y="356" width="3.63" height="9" fill="#3fa35a"><title>func_001D74A0 0x1D74A0 124 bytes</title></rect>
@@ -2451,7 +2458,7 @@
 <rect x="196.19" y="433" width="1.88" height="9" fill="#3fa35a"><title>func_002091A0 0x2091A0 64 bytes</title></rect>
 <rect x="198.06" y="433" width="3.87" height="9" fill="#3fa35a"><title>func_002091E0 0x2091E0 132 bytes</title></rect>
 <rect x="202.28" y="433" width="1.29" height="9" fill="#3fa35a"><title>func_00209270 0x209270 44 bytes</title></rect>
-<rect x="203.69" y="433" width="13.01" height="9" fill="#4a4f57"></rect>
+<rect x="203.69" y="433" width="13.01" height="9" fill="#3fa35a"><title>func_002092A0 0x2092A0 444 bytes</title></rect>
 <rect x="216.81" y="433" width="5.51" height="9" fill="#3fa35a"><title>func_00209460 0x209460 188 bytes</title></rect>
 <rect x="222.44" y="433" width="6.56" height="9" fill="#3fa35a"><title>func_00209520 0x209520 224 bytes</title></rect>
 <rect x="229.00" y="433" width="5.51" height="9" fill="#3fa35a"><title>func_00209600 0x209600 188 bytes</title></rect>
@@ -2565,7 +2572,8 @@
 <rect x="685.56" y="455" width="45.70" height="9" fill="#4a4f57"></rect>
 <rect x="731.50" y="455" width="5.74" height="9" fill="#3fa35a"><title>func_0021D900 0x21D900 196 bytes</title></rect>
 <rect x="737.59" y="455" width="12.07" height="9" fill="#3fa35a"><title>func_0021D9D0 0x21D9D0 412 bytes</title></rect>
-<rect x="749.78" y="455" width="67.85" height="9" fill="#4a4f57"></rect>
+<rect x="749.78" y="455" width="54.61" height="9" fill="#4a4f57"></rect>
+<rect x="804.62" y="455" width="13.01" height="9" fill="#3fa35a"><title>func_0021E2C0 0x21E2C0 444 bytes</title></rect>
 <rect x="817.75" y="455" width="0.82" height="9" fill="#3fa35a"><title>func_0021E480 0x21E480 28 bytes</title></rect>
 <rect x="818.69" y="455" width="20.51" height="9" fill="#4a4f57"></rect>
 <rect x="839.31" y="455" width="5.62" height="9" fill="#3fa35a"><title>func_0021E760 0x21E760 192 bytes</title></rect>
@@ -2697,7 +2705,7 @@
 <rect x="80.88" y="488" width="9.02" height="9" fill="#3fa35a"><title>func_00230240 0x230240 308 bytes</title></rect>
 <rect x="90.25" y="488" width="37.15" height="9" fill="#4a4f57"></rect>
 <rect x="127.75" y="488" width="6.21" height="9" fill="#3fa35a"><title>func_00230880 0x230880 212 bytes</title></rect>
-<rect x="134.31" y="488" width="13.01" height="9" fill="#4a4f57"></rect>
+<rect x="134.31" y="488" width="13.01" height="9" fill="#3fa35a"><title>func_00230960 0x230960 444 bytes</title></rect>
 <rect x="147.44" y="488" width="3.98" height="9" fill="#3fa35a"><title>func_00230B20 0x230B20 136 bytes</title></rect>
 <rect x="151.66" y="488" width="0.82" height="9" fill="#3fa35a"><title>func_00230BB0 0x230BB0 28 bytes</title></rect>
 <rect x="152.59" y="488" width="14.06" height="9" fill="#4a4f57"></rect>
@@ -2725,7 +2733,8 @@
 <rect x="757.75" y="488" width="4.22" height="9" fill="#3fa35a"><title>func_00235C80 0x235C80 144 bytes</title></rect>
 <rect x="761.97" y="488" width="117.30" height="9" fill="#4a4f57"></rect>
 <rect x="879.62" y="488" width="7.15" height="9" fill="#3fa35a"><title>func_00236CC0 0x236CC0 244 bytes</title></rect>
-<rect x="887.12" y="488" width="29.53" height="9" fill="#4a4f57"></rect>
+<rect x="887.12" y="488" width="16.05" height="9" fill="#4a4f57"></rect>
+<rect x="903.53" y="488" width="13.12" height="9" fill="#3fa35a"><title>func_00236FF0 0x236FF0 448 bytes</title></rect>
 <rect x="916.66" y="488" width="2.58" height="9" fill="#3fa35a"><title>func_002371B0 0x2371B0 88 bytes</title></rect>
 <rect x="919.47" y="488" width="18.87" height="9" fill="#4a4f57"></rect>
 <rect x="938.69" y="488" width="12.30" height="9" fill="#3fa35a"><title>func_002374A0 0x2374A0 420 bytes</title></rect>
@@ -3187,7 +3196,7 @@
 <rect x="295.56" y="609" width="0.60" height="9" fill="#3fa35a"><title>func_00289EE0 0x289EE0 20 bytes</title></rect>
 <rect x="296.50" y="609" width="3.40" height="9" fill="#3fa35a"><title>func_00289F00 0x289F00 116 bytes</title></rect>
 <rect x="300.25" y="609" width="0.60" height="9" fill="#3fa35a"><title>func_00289F80 0x289F80 8 bytes</title></rect>
-<rect x="300.72" y="609" width="13.24" height="9" fill="#4a4f57"></rect>
+<rect x="300.72" y="609" width="13.24" height="9" fill="#3fa35a"><title>func_00289F90 0x289F90 452 bytes</title></rect>
 <rect x="314.31" y="609" width="2.23" height="9" fill="#3fa35a"><title>func_0028A160 0x28A160 76 bytes</title></rect>
 <rect x="316.66" y="609" width="86.25" height="9" fill="#4a4f57"></rect>
 <rect x="402.91" y="609" width="4.34" height="9" fill="#3fa35a"><title>func_0028AD30 0x28AD30 148 bytes</title></rect>
@@ -4526,7 +4535,9 @@
 <rect x="414.62" y="719" width="7.97" height="9" fill="#3fa35a"><title>func_002DAEC0 0x2DAEC0 272 bytes</title></rect>
 <rect x="422.59" y="719" width="2.23" height="9" fill="#3fa35a"><title>__dt__Q23std9exceptionFv 0x2DAFD0 76 bytes</title></rect>
 <rect x="424.94" y="719" width="0.60" height="9" fill="#3fa35a"><title>what__Q23std9exceptionCFv 0x2DB020 12 bytes</title></rect>
-<rect x="425.41" y="719" width="113.44" height="9" fill="#4a4f57"></rect>
+<rect x="425.41" y="719" width="16.05" height="9" fill="#4a4f57"></rect>
+<rect x="441.81" y="719" width="13.36" height="9" fill="#3fa35a"><title>func_002DB260 0x2DB260 456 bytes</title></rect>
+<rect x="455.41" y="719" width="83.44" height="9" fill="#4a4f57"></rect>
 <rect x="538.84" y="719" width="7.50" height="9" fill="#3fa35a"><title>func_002DBF50 0x2DBF50 256 bytes</title></rect>
 <rect x="546.34" y="719" width="112.85" height="9" fill="#4a4f57"></rect>
 <rect x="659.31" y="719" width="5.62" height="9" fill="#3fa35a"><title>func_002DCF60 0x2DCF60 192 bytes</title></rect>
