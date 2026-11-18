@@ -19,3 +19,5 @@ o0_301_p mwcps2-3.0.1-020123 -c -g -O0,p -farcall off -sdatathreshold 8
 o1_p   mwcps2-3.0.3-020716  -c -g -O1,p -farcall off -sdatathreshold 8
 # opt_noexc: opt with C++ exceptions off; some C++ units have virtual tail calls (lw t9 / jr t9) that only build without exception tables
 opt_noexc mwcps2-3.0.3-020716 -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p -Cpp_exceptions off
+# opt_300_noexc: the 3.0 kit with C++ exceptions off (a unit at 0x2EC950)
+opt_300_noexc mwcps2-3.0-011126  -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p -Cpp_exceptions off
