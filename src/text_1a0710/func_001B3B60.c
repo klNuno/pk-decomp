@@ -1,0 +1,76 @@
+/* profile: o0_p */
+#include "common.h"
+
+extern f32 D_005AD8A0[];
+extern f32 D_005AD8A4[];
+extern f32 D_005AD8A8[];
+extern f32 D_005AD8AC[];
+extern f32 D_005AD8B0[];
+extern f32 D_005AD8B4[];
+extern f32 D_005AD8B8[];
+extern f32 D_005AD8BC[];
+extern f32 D_005AD8C0[];
+extern f32 D_005AD8C4[];
+extern f32 D_005AD8C8[];
+extern f32 D_005AD8CC[];
+extern f32 D_005AD8D0[];
+extern f32 D_005AD8D4[];
+extern f32 D_005AD8D8[];
+extern f32 D_005AD8DC[];
+extern s16 D_005AD8E0[];
+extern s16 D_005AD8E2[];
+extern s16 D_005AD8E4[];
+extern s16 D_005AD8E6[];
+extern s16 D_005AD8E8[];
+extern s16 D_005AD8EA[];
+extern f32 D_005AD8EC[];
+extern f32 D_005AD8F0[];
+extern f32 D_005AD8F4[];
+extern f32 D_005AD8F8[];
+extern f32 D_005AD8FC[];
+extern f32 D_005AD900[];
+extern f32 D_005AD904[];
+extern f32 D_005AD908[];
+extern f32 D_005AD90C[];
+extern f32 D_005AD910[];
+extern f32 D_005AD914[];
+extern f32 D_005AD918[];
+extern s16 D_005AD91C[];
+
+void func_001B3B60(void) {
+    D_005AD8A0[0] = 0.35f;
+    D_005AD8A4[0] = 0.35f;
+    D_005AD8A8[0] = 0.1f;
+    D_005AD8AC[0] = 0.1f;
+    D_005AD8B0[0] = 0.7853982f;
+    D_005AD8B4[0] = 0.7853982f;
+    D_005AD910[0] = 0.3926991f;
+    D_005AD8B8[0] = 0.4f;
+    D_005AD8BC[0] = 0.4f;
+    D_005AD8C0[0] = 0.005f;
+    D_005AD8C4[0] = 0.01f;
+    D_005AD8C8[0] = 0.01f;
+    D_005AD8CC[0] = 0.7853982f;
+    D_005AD8D0[0] = 0.19634955f;
+    D_005AD8D4[0] = 0.5f;
+    D_005AD8D8[0] = 0.05f;
+    D_005AD8DC[0] = 5.0f;
+    D_005AD8E0[0] = 3;
+    D_005AD8E2[0] = 1;
+    D_005AD8E4[0] = 4;
+    D_005AD8E6[0] = 0x14;
+    D_005AD8E8[0] = 0x3C;
+    D_005AD8EA[0] = 0x3C;
+    D_005AD8EC[0] = 3.0f;
+    D_005AD8F0[0] = 10.0f;
+    D_005AD8F4[0] = 1.5f;
+    D_005AD8F8[0] = 3.0f;
+    D_005AD8FC[0] = 3.0f;
+    D_005AD900[0] = 0.0f;
+    D_005AD904[0] = 4.0f;
+    D_005AD908[0] = 10.0f;
+    D_005AD90C[0] = 1.0f;
+    D_005AD914[0] = 1.0f;
+    D_005AD918[0] = 1.0f;
+    D_005AD91C[0] = 0;
+}
