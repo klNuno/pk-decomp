@@ -1,0 +1,55 @@
+#include "common.h"
+
+typedef struct unk_func_002E5AB0_0 {
+    struct unk_func_002E5AB0_0 *unk_00;
+    struct unk_func_002E5AB0_0 *unk_04;
+    u8 pad_08[4];
+    char *unk_0C;
+} unk_func_002E5AB0_0;
+
+typedef struct unk_func_002E5AB0_1 {
+    unk_func_002E5AB0_0 *unk_00;
+    u8 unk_04;
+} unk_func_002E5AB0_1;
+
+extern "C" {
+unk_func_002E5AB0_0 *func_002E5BE0(unk_func_002E5AB0_0 *, unk_func_002E5AB0_0 *, bool, bool, char **);
+s32 strcmp(const char *, const char *);
+extern u8 D_0035F6E0;
+extern u8 D_0035F6E4;
+
+
+unk_func_002E5AB0_1 *func_002E5AB0(unk_func_002E5AB0_1 *arg0, unk_func_002E5AB0_0 *arg1, char **arg2) {
+    unk_func_002E5AB0_0 *var_s6;
+    unk_func_002E5AB0_0 *var_s0;
+    unk_func_002E5AB0_0 *var_s1;
+    bool var_s2;
+    bool var_s3;
+
+    var_s6 = (unk_func_002E5AB0_0 *)&arg1->unk_04;
+    var_s2 = 1;
+    var_s3 = var_s2;
+    var_s1 = arg1->unk_04;
+    var_s0 = 0;
+    while (var_s1 != NULL) {
+        var_s6 = var_s1;
+        if (strcmp(*arg2, var_s1->unk_0C) < 0) {
+            var_s1 = var_s1->unk_00;
+            var_s2 = 1;
+        } else {
+            var_s0 = var_s1;
+            var_s1 = var_s1->unk_04;
+            var_s2 = 0;
+            var_s3 = 0;
+        }
+    }
+    if (var_s0 == NULL || strcmp(var_s0->unk_0C, *arg2) < 0) {
+        arg0->unk_00 = func_002E5BE0(arg1, var_s6, var_s2, var_s3, arg2);
+        arg0->unk_04 = D_0035F6E0;
+        return arg0;
+    }
+    arg0->unk_00 = var_s0;
+    arg0->unk_04 = D_0035F6E4;
+    return arg0;
+}
+}
