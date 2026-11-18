@@ -12,3 +12,8 @@ o2     mwcps2-3.0.3-020716  -c -g -O2 -farcall off -sdatathreshold 8
 opt_300 mwcps2-3.0-011126  -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
 opt_301 mwcps2-3.0.1-020123 -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
 opt_nodf mwcps2-3.0.3-020716 -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix off" -inline deferred -O3,p
+# -O0,p (level 0, optimise for speed): the kit then aligns labels inside a loop or switch, and its exit
+# label, to 8 bytes with one nop (the "alignlabel" of the 2.4 kit, implied by speed in 3.0.x).
+o0_p   mwcps2-3.0.3-020716  -c -g -O0,p -farcall off -sdatathreshold 8
+o0_301_p mwcps2-3.0.1-020123 -c -g -O0,p -farcall off -sdatathreshold 8
+o1_p   mwcps2-3.0.3-020716  -c -g -O1,p -farcall off -sdatathreshold 8

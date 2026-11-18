@@ -16,5 +16,8 @@ Most of the game was built at full optimisation, but some units were not optimis
 ### 4. Short loops are padded, and the padding dates each object file
 Almost no loop in the game code is shorter than 7 instructions: short loops carry extra `nop`s before their closing branch. The R5900 has a known erratum with loops of six instructions or fewer (GNU as works around it with `-mfix-r5900`), and CodeWarrior pads them itself: the 3.0 and 3.0.1 builds pad a short loop to 8 instructions, from its first instruction to its delay slot, and 3.0.3 to 7. Of the 124 padded loops in the game code, 88 have 8 instructions and 36 have 7, interleaved across the whole executable: about two thirds of the units with a short loop were compiled with a build older than 3.0.3 (July 2002).
 
-### 5. Some PS2 debug messages name the function that prints them
+### 5. Unoptimised code was still built "for speed"
+Many unoptimised functions have a lone `nop` at labels inside their loops. It is label alignment: with the "optimise for speed" switch (`,p`), CodeWarrior pads a label inside a loop statement with one `nop` when it falls at 4 mod 8, so the next instruction is 8-byte aligned. Over 2,087 unoptimised game functions, 1,084 such nops sit at 4 mod 8 and none contradicts the rule; of the 443 unoptimised functions matched so far, one was built without the switch. The same switch is what makes the optimised code pad its loop labels.
+
+### 6. Some PS2 debug messages name the function that prints them
 A dozen messages left in the PS2 executable start with the name of their own function, and those names exist in the GameCube symbol table: the strings were written by hand, not by a macro, and survived into the release build.
