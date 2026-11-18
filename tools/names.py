@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Give functions their names: add them to config/<region>/symbol_addrs.txt and rename them in src/.
 
-  tools/names.py apply PROPOSALS.tsv [--confidence high] [--region eu] [--dry-run]
+  tools/names.py apply PROPOSALS.tsv [--confidence high] [--medium-kinds table,selfname] [--region eu] [--dry-run]
   tools/names.py rename OLD NEW [--region eu]
 
 PROPOSALS.tsv is the output of `tools/gcxref.py match`: ps2_addr, current_name, proposed_name,
@@ -63,6 +63,10 @@ def rename_src(old, new, files):
 
 
 def evidence(kind, detail, gc_addr):
+    if kind == "table":
+        m = re.search(r"entry (\d+/\d+) of table (D_[0-9A-F]{8})", detail)
+        if m:
+            return f"gc {gc_addr}, entry {m.group(1)} of the function table {m.group(2)}, as on GameCube"
     if kind == "callgraph":
         m = re.search(r"callee (\d+/\d+) of func_[0-9A-F]{8}=(\w+)", detail)
         return f"gc {gc_addr}, callee {m.group(1)} of {m.group(2)}" if m else f"gc {gc_addr}, call graph"
@@ -80,7 +84,7 @@ def apply(a):
     for row in rows:
         addr_s, cur, new, kind, detail, conf, gc_addr = row[:7]
         addr = int(addr_s, 16)
-        if conf not in levels:
+        if conf not in levels and not (conf == "medium" and kind in a.medium_kinds.split(",")):
             continue
         why = None
         if not IDENT.match(new):
@@ -116,6 +120,7 @@ def main():
     ap = sub.add_parser("apply")
     ap.add_argument("proposals")
     ap.add_argument("--confidence", default="high", choices=["high", "medium", "low"])
+    ap.add_argument("--medium-kinds", default="", help="evidence kinds whose medium proposals count too")
     ap.add_argument("--region", default="eu")
     ap.add_argument("--dry-run", action="store_true")
     rp = sub.add_parser("rename")

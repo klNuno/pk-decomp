@@ -6,9 +6,11 @@
 The profile (kit and flags) comes from config/mwcc_profiles.txt; a source picks one with a comment
 `/* profile: NAME */` in its first five lines, else "opt". With -g, mwccps2 puts each function in a
 section of its own named .text: this renames each one to .text.<function> and lowers its alignment
-to 4 (and retypes the Metrowerks debug sections that GNU ld refuses), so the linker script can place every function at its retail address. An object that defines
-data (a string literal, a jump table, a static or initialised global) is refused unless --allow-data,
-since the data block of the executable is still assembled as one piece.
+to 4 (and retypes the Metrowerks debug sections that GNU ld refuses), so the linker script can place
+every function at its retail address. A switch jump table (a .rodata made only of R_MIPS_32 words)
+becomes .rodata.<func>, placed by tools/link.py over the retail jtbl_ block. Any other data (a string
+literal, a static or initialised global) is refused unless --allow-data: the rest of the data block
+is still assembled from splat's output.
 """
 import argparse
 import os
@@ -82,16 +84,32 @@ class Elf:
         return out
 
 
+def jump_tables_only(elf, index):
+    """True when every word of section `index` is a R_MIPS_32 relocation (a switch jump table)."""
+    size = elf.sh(index)[5]
+    words = set()
+    for i, name, s in elf.sections():
+        if s[1] == 9 and s[7] == index:  # SHT_REL against this section
+            for k in range(s[5] // 8):
+                off, info = struct.unpack_from("<II", elf.d, s[4] + k * 8)
+                if info & 0xFF != 2:  # R_MIPS_32
+                    return False
+                words.add(off)
+    return size % 4 == 0 and words == set(range(0, size, 4))
+
+
 def prepare(obj, allow_data=False):
     elf = Elf(open(obj, "rb").read())
     syms = elf.symbols()
-    renames, data = {}, []
+    renames, data, tables = {}, [], []
     for i, name, s in elf.sections():
         if name == ".text":
             funcs = [n for n, v, sz, typ, bind, ndx in syms if ndx == i and typ == 2 and v == 0]
             if len(funcs) != 1:
                 raise SystemExit(f"{obj}: .text section {i} holds {len(funcs)} function starts")
             renames[i] = ".text." + funcs[0]
+        elif name == ".rodata" and s[5] and jump_tables_only(elf, i):
+            tables.append(i)
         elif name in DATA_SECTIONS and s[5]:
             data.append(f"{name} ({s[5]} bytes)")
         if s[1] >= 0x70000000:
@@ -100,16 +118,24 @@ def prepare(obj, allow_data=False):
             s[1] = 1
             elf.set_sh(i, s)
     if data and not allow_data:
-        print(f"{obj}: defines data: {', '.join(data)} (strings, jump tables, statics and initialised globals "
+        print(f"{obj}: defines data: {', '.join(data)} (strings, statics and initialised globals "
               "are not supported yet)", file=sys.stderr)
         return 3
+    # Switch jump tables: .rodata.<func>, placed by tools/link.py at the function's retail jtbl_ address.
+    if tables:
+        funcs = [n[len(".text."):] for n in renames.values()]
+        if len(funcs) != 1:
+            print(f"{obj}: jump tables with {len(funcs)} functions in one file", file=sys.stderr)
+            return 3
+        for i in tables:
+            renames[i] = ".rodata." + funcs[0]
     # Append the new names to a copy of .shstrtab placed at the end of the file.
     st = elf.sh(elf.shstrndx)
     table = bytearray(elf.d[st[4]:st[4] + st[5]])
     for i, new in renames.items():
         v = elf.sh(i)
         v[0] = len(table)
-        v[8] = 4  # sh_addralign: the linker script places each function itself
+        v[8] = 4  # sh_addralign: the linker script places each function and table itself
         table += new.encode() + b"\0"
         elf.set_sh(i, v)
     st = elf.sh(elf.shstrndx)

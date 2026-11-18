@@ -39,10 +39,12 @@ LD      := $(CROSS)ld
 OBJCOPY := $(CROSS)objcopy
 ASFLAGS := -Iinclude -march=r5900 -mabi=eabi -EL -G0 -no-pad-sections
 
-# Text comes from build/<region>/gen/ (tools/link.py drops the functions C defines); data and bss from splat.
+# Text and data come from build/<region>/gen/ (tools/link.py drops the functions and jump tables C
+# defines); bss straight from splat.
 TEXT_S  := $(sort $(wildcard asm/$(REGION)/text_*.s))
-GEN_S   := $(TEXT_S:asm/$(REGION)/%=$(BUILD)/gen/%)
-S_SRCS  := $(shell find asm/$(REGION)/data -name '*.s' 2>/dev/null)
+DATA_S  := $(sort $(wildcard asm/$(REGION)/data/*.data.s))
+GEN_S   := $(TEXT_S:asm/$(REGION)/%=$(BUILD)/gen/%) $(DATA_S:asm/$(REGION)/%=$(BUILD)/gen/%)
+S_SRCS  := $(filter-out $(DATA_S),$(shell find asm/$(REGION)/data -name '*.s' 2>/dev/null))
 C_SRCS  := $(shell find src -name '*.c' -o -name '*.cpp' 2>/dev/null)
 # The ELF header and the file's tail (section names, .comment, .reginfo, section headers), from splat.
 BIN_SRCS := $(shell find assets/$(REGION) -name '*.bin' 2>/dev/null)
@@ -89,7 +91,7 @@ $(BUILD)/%.cpp.o: %.cpp config/mwcc_profiles.txt tools/cc.py
 	$(CC) $< $@
 
 # One stamp writes every gen file and the linker script; unchanged files keep their date.
-$(BUILD)/gen.stamp: $(C_OBJS) $(TEXT_S) $(LDSCRIPT) tools/link.py
+$(BUILD)/gen.stamp: $(C_OBJS) $(TEXT_S) $(DATA_S) $(LDSCRIPT) tools/link.py
 	$(PYTHON) -I tools/link.py $(REGION) $(C_OBJS)
 	@touch $@
 $(LINKLD) $(GEN_S): $(BUILD)/gen.stamp ;

@@ -48,22 +48,44 @@ def split_args(s):
     return out
 
 
+def wrapped(e):
+    """True when e is one parenthesised group, like (*(s32 *)((u8 *)p + 4))."""
+    return e.startswith("(") and close_paren(e, 0) == len(e) - 1
+
+
 def rewrite_fields(c):
+    """M2C_FIELD(e, T *, off) -> *(T *)((u8 *)e + off), innermost first."""
     while True:
-        i = c.find("M2C_FIELD(")
+        i = c.rfind("M2C_FIELD(")
         if i < 0:
             return c
         j = close_paren(c, i + len("M2C_FIELD"))
         expr, typ, off = split_args(c[i + len("M2C_FIELD("):j])
-        c = c[:i] + f"(*({typ})((u8 *)({expr}) + {off}))" + c[j + 1:]
+        base = expr if re.fullmatch(r"\w+", expr) or wrapped(expr) else f"({expr})"
+        c = c[:i] + f"(*({typ})((u8 *){base} + {off}))" + c[j + 1:]
+
+
+def strip_outer(c):
+    """`return (X);` and `= (X);` lose the parentheses around a whole X."""
+    out, k = [], 0
+    for m in re.finditer(r"(?:return |= )\(", c):
+        start = m.end() - 1
+        if start < k:
+            continue
+        end = close_paren(c, start)
+        if c[end + 1:end + 2] == ";":
+            out.append(c[k:start] + c[start + 1:end])
+            k = end + 1
+    return "".join(out) + c[k:]
 
 
 def clean(draft):
     c = re.sub(r"/\*.*?\*/", "", draft, flags=re.S)
     c = re.sub(r"^\s*M2C_UNK\s+(\w+\s*\()", r"void \1", c, flags=re.M)
+    c = rewrite_fields(c)
     if re.search(r"M2C_|\?|saved_reg|unaligned|\bgoto\b", c):
         return None
-    c = rewrite_fields(c)
+    c = strip_outer(c)
     c = re.sub(r"[ \t]+$", "", c, flags=re.M)
     c = re.sub(r"\{\n\n+", "{\n", c)
     c = re.sub(r"\{\n\}", "{\n}", c)
@@ -85,12 +107,32 @@ def chunk_of(func):
     return fmatch.index()[0][func][0]
 
 
+TAIL = re.compile(r"^(\s+/\*[^*]*\*/\s+)j(\s+)(func_[0-9A-F]{8}|[A-Za-z_]\w*)\s*$")
+
+
+def untail(path):
+    """m2c ignores the arguments set in the delay slot of a tail call (`j f`): rewrite each one as
+    `jal f` followed by a return, which compiles back to the same tail call. Returns the new path."""
+    lines, out, k = open(path).read().splitlines(True), [], 0
+    while k < len(lines):
+        m = TAIL.match(lines[k])
+        if m and not m.group(3).startswith(".L") and k + 1 < len(lines):
+            out += [f"{m.group(1)}jal{m.group(2)}{m.group(3)}\n", lines[k + 1], "    jr $ra\n", "    nop\n"]
+            k += 2
+            continue
+        out.append(lines[k])
+        k += 1
+    new = path[:-2] + "_m2c.s"
+    open(new, "w").write("".join(out))
+    return new
+
+
 def attempt(func, hint, profiles):
     t = run([PY, "-I", "tools/fmatch.py", "asm", func])
     if t.returncode:
         return func, "skip", "no asm"
     r = run([PY, "tools/src/m2c/m2c.py", "-t", "mipsee-gcc-c", "--valid-syntax", "--context",
-             os.path.join(ROOT, "build/fmatch/_ctx.c"), t.stdout.strip()])
+             os.path.join(ROOT, "build/fmatch/_ctx.c"), untail(os.path.join(ROOT, t.stdout.strip()))])
     if r.returncode or "Decompilation failure" in r.stdout:
         return func, "skip", "m2c failed"
     body = clean(r.stdout)

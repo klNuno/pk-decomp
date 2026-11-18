@@ -1,0 +1,5 @@
+#include "common.h"
+
+s32 func_002F5760(s32 arg0) {
+    return arg0 + 4;
+}

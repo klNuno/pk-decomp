@@ -86,16 +86,47 @@ def work_dir(func):
     return d
 
 
+def target_asm(func):
+    """Write build/fmatch/FUNC/target.s: the function, plus its switch jump tables with their words
+    turned into code labels (m2c follows them). Returns the path."""
+    funcs, _ = index()
+    chunk, addr, size = funcs[func]
+    head, fs = link.parse_chunk(f"{ROOT}/asm/{REGION}/{chunk}.s")
+    lines = list(next(f[3] for f in fs if f[0] == func))
+    refs = set(link.JTBL.findall("".join(lines)))
+    tables, targets = [], set()
+    for path in sorted(glob.glob(f"{ROOT}/asm/{REGION}/data/*.data.s")) if refs else []:
+        for b in link.parse_chunk(path)[1]:
+            if b[0] not in refs:
+                continue
+            for ln in b[3]:
+                m = re.search(r"\.word 0x([0-9A-Fa-f]{8})\s*$", ln)
+                if m and addr <= int(m.group(1), 16) < addr + size:
+                    targets.add(int(m.group(1), 16))
+                    ln = ln[:m.start()] + f".word .L{int(m.group(1), 16):08X}\n"
+                tables.append(ln)
+    if targets:
+        have = {int(x, 16) for x in re.findall(r"^\s*\.L([0-9A-F]{8}):", "".join(lines), re.M)}
+        out = []
+        for ln in lines:
+            m = link.INSN.match(ln)
+            if m and int(m.group(1), 16) in targets - have:
+                out.append(f"  .L{int(m.group(1), 16):08X}:\n")
+            out.append(ln)
+        lines = out
+    path = os.path.join(work_dir(func), "target.s")
+    text = "".join(head) + "".join(lines)
+    if tables:
+        text += "\n.section .rodata\n" + "".join(tables)
+    open(path, "w").write(text)
+    return path
+
+
 def cmd_asm(a):
     funcs, _ = index()
     if a.func not in funcs:
         sys.exit(f"no function {a.func} in asm/{REGION}/text_*.s")
-    chunk, addr, size = funcs[a.func]
-    head, fs = link.parse_chunk(f"{ROOT}/asm/{REGION}/{chunk}.s")
-    lines = next(f[3] for f in fs if f[0] == a.func)
-    out = os.path.join(work_dir(a.func), "target.s")
-    open(out, "w").write("".join(head) + "".join(lines))
-    print(os.path.relpath(out, ROOT))
+    print(os.path.relpath(target_asm(a.func), ROOT))
     return 0
 
 
@@ -112,11 +143,7 @@ def cmd_info(a):
 
 
 def cmd_m2c(a):
-    cmd_asm_quiet = os.path.join(work_dir(a.func), "target.s")
-    funcs, _ = index()
-    chunk, addr, size = funcs[a.func]
-    head, fs = link.parse_chunk(f"{ROOT}/asm/{REGION}/{chunk}.s")
-    open(cmd_asm_quiet, "w").write("".join(head) + "".join(next(f[3] for f in fs if f[0] == a.func)))
+    cmd_asm_quiet = target_asm(a.func)
     ctx = os.path.join(work_dir(a.func), "ctx.c")
     r = run(["bash", "-c", f"cpp -P -undef -DM2CTX -Iinclude include/common.h > {ctx}"])
     if r.returncode:
@@ -170,7 +197,18 @@ def cmd_diff(a):
     defined = {n for n, v, sz, typ, bind, ndx in cc.Elf(open(obj, "rb").read()).symbols() if n and ndx}
     ld = [f"_gp = 0x{GP:X};"]
     ld += [f"{n} = 0x{v:X};" for n, v in sorted(syms.items()) if n not in defined and "." not in n]
-    ld += ["SECTIONS {", f"  .text 0x{addr:X} : {{ *(.text.{a.func}) }}", "  /DISCARD/ : { *(*) }", "}"]
+    ld += ["SECTIONS {", f"  .text 0x{addr:X} : {{ *(.text.{a.func}) }}"]
+    table = None
+    if ".rodata." + a.func in sections:
+        # A switch jump table goes over the first retail jtbl_ block the function reads.
+        lines = next(b[3] for b in link.parse_chunk(f"{ROOT}/asm/{REGION}/{chunk}.s")[1] if b[0] == a.func)
+        refs = sorted({syms[r] for r in link.JTBL.findall("".join(lines)) if r in syms})
+        if not refs:
+            print(f"{a.func}: your C has a jump table, the retail function reads none (no switch here)")
+            return 2
+        table = (refs[0], sections[".rodata." + a.func][5])
+        ld += [f"  .rodata 0x{table[0]:X} : {{ *(.rodata.{a.func}) }}"]
+    ld += ["  /DISCARD/ : { *(*) }", "}"]
     script = os.path.join(work, "link.ld")
     open(script, "w").write("\n".join(ld) + "\n")
     elf, out = os.path.join(work, "base.elf"), os.path.join(work, "base.bin")
@@ -185,6 +223,13 @@ def cmd_diff(a):
     mine = open(out, "rb").read()
     target = retail(addr, size)
     pad = target[len(mine):]
+    if table:
+        tout = os.path.join(work, "table.bin")
+        run([f"{BIN}/mipsel-linux-gnu-objcopy", "-O", "binary", "--only-section=.rodata", elf, tout])
+        if open(tout, "rb").read() != retail(table[0], table[1]):
+            print(f"jump table at 0x{table[0]:X} differs from the retail one (case order or count)")
+            if mine == target[:len(mine)] and not any(pad):
+                return 1
     if mine == target[:len(mine)] and not any(pad):
         print(f"MATCH {a.func} 100%")
         return 0

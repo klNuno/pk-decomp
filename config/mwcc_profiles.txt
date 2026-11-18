@@ -3,3 +3,6 @@
 # Kit chosen by calibration: 0x2BC5F0 inlines (int)float as trunc.w.s, which only 3.0.3 emits.
 opt   mwcps2-3.0.3-020716  -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
 o0    mwcps2-3.0.3-020716  -c -g -O0 -farcall off -sdatathreshold 8
+o0_301 mwcps2-3.0.1-020123  -c -g -O0 -farcall off -sdatathreshold 8
+o1     mwcps2-3.0.3-020716  -c -g -O1 -farcall off -sdatathreshold 8
+o2     mwcps2-3.0.3-020716  -c -g -O2 -farcall off -sdatathreshold 8

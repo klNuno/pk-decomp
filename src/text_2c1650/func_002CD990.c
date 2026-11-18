@@ -1,0 +1,5 @@
+#include "common.h"
+
+s32 func_002CD990(s32 arg0) {
+    return (arg0 + 3) - (arg0 & 3);
+}
