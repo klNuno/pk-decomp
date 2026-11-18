@@ -19,6 +19,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cc  # noqa: E402
 
+MANGLED = re.compile(r"__(?:ct|dt|as|eq|ne|vc|cl)__|\w+__F\w*$|\w+__\d")
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VRAM = 0x100000
 INSN = re.compile(r"\s+/\* [0-9A-F]+ ([0-9A-F]{8})(?: [0-9A-F]+)? \*/")
@@ -120,7 +122,10 @@ def main():
                 tables[name] = (obj, tsize, refs)
         chunk = os.path.basename(path)[:-2]
         entries[chunk] = split(path, f"{ROOT}/{build}/gen/{chunk}.s", ".text", "ax", cut, build)
-    missing = set(cfuncs) - seen
+    # A C++ unit emits out-of-line copies of inline members (a destructor every caller inlined).
+    # The original linker dead-stripped them; here they stay unplaced and /DISCARD/ drops them
+    # (ld still fails if anything references one). A plain C or func_ name must exist in retail.
+    missing = {f for f in set(cfuncs) - seen if not MANGLED.match(f)}
     if missing:
         raise SystemExit("C functions with no retail asm: " + ", ".join(sorted(missing)))
     blocks = {}

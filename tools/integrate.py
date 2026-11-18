@@ -9,6 +9,7 @@ halves until each one that breaks the build is found and taken back out. Prints 
 --pause stops a process group (a running autopass) during each make check, to share the CPU.
 """
 import argparse
+import glob
 import os
 import shutil
 import signal
@@ -62,6 +63,10 @@ def main():
     def remove(group):
         for f, dst in group:
             os.remove(dst)
+        # A removed source leaves no newer prerequisite of gen.stamp: drop the stamps so link.py
+        # runs again and puts the function back into the generated asm.
+        for stamp in glob.glob(os.path.join(ROOT, "build", "*", "gen.stamp")):
+            os.remove(stamp)
 
     def restore(group):
         for f, dst in group:
