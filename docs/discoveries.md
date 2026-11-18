@@ -21,3 +21,6 @@ Many unoptimised functions have a lone `nop` at labels inside their loops. It is
 
 ### 6. Some PS2 debug messages name the function that prints them
 A dozen messages left in the PS2 executable start with the name of their own function, and those names exist in the GameCube symbol table: the strings were written by hand, not by a macro, and survived into the release build.
+
+### 7. Some C++ objects were built without exception support
+Most C++ functions keep a virtual call as a call (`jalr`) followed by a return, which is what CodeWarrior emits when exception handling is on. A few make the same virtual call as a tail jump (`jr`), and they compile byte for byte only with C++ exceptions switched off (`-Cpp_exceptions off`): the C++ side mixes objects built with and without exception tables. The executable also carries C++ virtual-base thunks (load the offset from the object, adjust `this`, jump), so at least one class hierarchy uses virtual inheritance.
