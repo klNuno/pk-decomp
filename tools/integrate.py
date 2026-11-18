@@ -96,7 +96,7 @@ def main():
         status.setdefault(f, "ok")
     for f in a.files:
         print(f"{os.path.splitext(os.path.basename(f))[0]}\t{status[f]}")
-    verdict = [ln for ln in tail.splitlines() if "warning:" not in ln]
+    verdict = [ln for ln in tail.splitlines() if "warning:" not in ln and not ln.lstrip().startswith("#")]
     print(verdict[-1] if verdict else "")
     n = sum(1 for v in status.values() if v == "ok")
     print(f"integrated {n} of {len(a.files)}; make check {'OK' if ok else 'FAILED'}")
