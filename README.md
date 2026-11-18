@@ -2,7 +2,11 @@
 
 A matching decompilation of Disney's PK: Out of the Shadows (PlayStation 2, Ubi Soft Casablanca, 2002), known in Europe as Disney's Donald Duck PK and in Italy as Disney Paperino: Chi è PK?. The goal is C and C++ that rebuild the retail executable byte for byte, then readable names and findings about the game.
 
-No game data is in this repository: build it from your own disc (`disks/README.md`).
+<img src="docs/img/game/title-eu.png" width="400" alt="Title screen of the European release"> <img src="docs/img/game/demo-eu.png" width="400" alt="The attract-mode demo">
+
+*The European release in PCSX2: title screen and attract-mode demo.*
+
+No game data is in this repository beyond these two small screenshots: build it from your own disc (`disks/README.md`).
 
 ## Status
 The EU executable (SLES_507.73) rebuilds byte for byte from a mix of C and assembly. Each function written in C is compiled with the CodeWarrior PS2 build its unit used (3.0, 3.0.1 or 3.0.3) and linked at its retail address; `make check` compares the whole file with the retail one.
