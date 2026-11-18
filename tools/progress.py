@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import link  # noqa: E402
 
 # Library code: 8-byte aligned functions, Sony SDK 2.3.x tags, syscall stubs (first estimate, phase 1).
-LIBRARY = [(0x100000, 0x129B40), (0x284658, 0x285EB0), (0x319F00, 0x324580)]
+LIBRARY = [(0x100000, 0x129B40), (0x2842B0, 0x285EB0), (0x319F00, 0x324580)]
 UNREAD = re.compile(r"\b(?:func_[0-9A-F]{8}|D_[0-9A-F]{8}|unk_\w+|arg\d+|temp_\w+|var_\w+|sp[0-9A-F]+)\b")
 LEVELS = [("asm", "Assembly", "#4a4f57"), ("c", "C, names left to find", "#3fa35a"),
           ("read", "C, every name ours", "#8fe0a0"), ("lib", "Library, linked as shipped", "#2c2b29")]
