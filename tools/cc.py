@@ -17,7 +17,9 @@ import os
 import re
 import shlex
 import struct
+import shutil
 import subprocess
+import tempfile
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -158,8 +160,13 @@ def main():
     if prof not in profiles():
         sys.exit(f"{a.src}: unknown profile {prof} (config/mwcc_profiles.txt)")
     os.makedirs(os.path.dirname(os.path.abspath(a.obj)), exist_ok=True)
-    r = subprocess.run(compile_cmd(a.src, a.obj, prof, a.extra), capture_output=True, text=True)
-    out = (r.stdout + r.stderr).strip()
+    # mwccps2 cannot open a source whose path is long (C++ method names make long file names):
+    # compile a short-named copy; sources include only from include/.
+    with tempfile.TemporaryDirectory(prefix="pkcc") as tmp:
+        short = os.path.join(tmp, "u" + os.path.splitext(a.src)[1])
+        shutil.copyfile(a.src, short)
+        r = subprocess.run(compile_cmd(short, a.obj, prof, a.extra), capture_output=True, text=True)
+    out = (r.stdout + r.stderr).strip().replace(short, a.src)
     if r.returncode or not os.path.exists(a.obj):
         print(out, file=sys.stderr)
         if os.path.exists(a.obj):
