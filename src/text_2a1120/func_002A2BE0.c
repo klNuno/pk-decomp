@@ -14,7 +14,7 @@ typedef struct {
     f32 unk_10;
 } unk_func_002A2BE0_1;
 
-f32 func_00126140();
+f32 int2dB__Fi();
 unk_func_002A2BE0_1 *func_0029DA50();
 void func_002A2BD0();
 
@@ -24,9 +24,9 @@ void func_002A2BE0(unk_func_002A2BE0_0 *arg0) {
     f32 temp2;
     unk_func_002A2BE0_1 *temp;
 
-    temp2 = func_00126140(arg0->unk_10);
-    temp1 = func_00126140(arg0->unk_08);
-    temp0 = func_00126140(arg0->unk_00);
+    temp2 = int2dB__Fi(arg0->unk_10);
+    temp1 = int2dB__Fi(arg0->unk_08);
+    temp0 = int2dB__Fi(arg0->unk_00);
     temp = func_0029DA50(0xC);
     temp->unk_08 = temp0;
     temp->unk_0C = temp1;

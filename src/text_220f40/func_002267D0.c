@@ -18,10 +18,10 @@ typedef struct {
     u8 unk_10;
 } unk_func_002267D0_2;
 
-s32 func_001EBBD0();
-s32 func_001BFA30();
-unk_func_002267D0_1 *func_001971A0(s32);
-unk_func_002267D0_2 *func_0019AA30();
+s32 fn_p_stEvalTree();
+s32 fn_h_StandardGameGetSuperObject();
+unk_func_002267D0_1 *HIE_fn_hGetSuperObjectObject(s32);
+unk_func_002267D0_2 *fn_p_stBrainGetMind();
 void func_00226760(s32, unk_func_002267D0_0 *, u8);
 
 s32 func_002267D0(s32 arg0, s32 arg1) {
@@ -31,10 +31,10 @@ s32 func_002267D0(s32 arg0, s32 arg1) {
     s32 temp4;
     u8 temp5;
 
-    arg1 = func_001EBBD0(arg0, arg1, temp);
-    temp2 = func_001BFA30(temp[0]->unk_4);
-    temp3 = func_0019AA30(func_001971A0(temp2)->unk_C);
-    arg1 = func_001EBBD0(arg0, arg1, temp);
+    arg1 = fn_p_stEvalTree(arg0, arg1, temp);
+    temp2 = fn_h_StandardGameGetSuperObject(temp[0]->unk_4);
+    temp3 = fn_p_stBrainGetMind(HIE_fn_hGetSuperObjectObject(temp2)->unk_C);
+    arg1 = fn_p_stEvalTree(arg0, arg1, temp);
     temp4 = 1;
     if (temp2 == arg0 && !temp3->unk_10 == 0) {
         temp4 = 0;

@@ -1,0 +1,5 @@
+#include "common.h"
+
+u16 func_00162300(void *arg0) {
+    return *(u16 *)((u8 *)arg0 + 0x14);
+}

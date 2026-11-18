@@ -9,7 +9,7 @@ typedef struct {
 
 typedef u8 (*unk_func_001E9610_1)(s32 *, s32, s32);
 
-unk_func_001E9610_1 func_00208DE0(s32);
+unk_func_001E9610_1 fn_p_fn_pGetDsgVarGetFunctionPtr(s32);
 
 u8 func_001E9610(unk_func_001E9610_0 *arg0, u8 arg1, s32 arg2) {
     u8 ret;
@@ -21,7 +21,7 @@ u8 func_001E9610(unk_func_001E9610_0 *arg0, u8 arg1, s32 arg2) {
     ret = 0;
     p = arg0;
     temp = p->unk_00;
-    fp = func_00208DE0(temp);
+    fp = fn_p_fn_pGetDsgVarGetFunctionPtr(temp);
     if (p->unk_00 == 8) {
         idx = arg1 * 3;
     } else {

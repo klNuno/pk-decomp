@@ -5,7 +5,7 @@ A matching decompilation of Disney's PK: Out of the Shadows (PlayStation 2, Ubi 
 No game data is in this repository: build it from your own disc (`disks/README.md`).
 
 ## Status
-The EU executable (SLES_507.73) rebuilds byte for byte from a mix of C and assembly. Each function written in C is compiled with CodeWarrior PS2 3.0.3 and linked at its retail address; `make check` compares the whole file with the retail one.
+The EU executable (SLES_507.73) rebuilds byte for byte from a mix of C and assembly. Each function written in C is compiled with the CodeWarrior PS2 build its unit used (3.0, 3.0.1 or 3.0.3) and linked at its retail address; `make check` compares the whole file with the retail one.
 
 ![Map of the executable: functions in C against assembly](docs/progress/codemap.svg)
 
@@ -19,7 +19,7 @@ make check-disk                         # disc against Redump, extract, executab
 make split                              # splat, alone
 make check                              # rebuild and compare
 ```
-The compiler, Metrowerks CodeWarrior for PS2 ("MW MIPS C Compiler (2.4.1.01)" in the executable, written by both the 2.4 and the 3.0.x builds), is commercial. `tools/setup.sh` fetches decomp.me's compiler kits into `tools/mwcc/<kit>/` for local use; they are never committed. Compiler flags live in `config/mwcc_profiles.txt` (kit `mwcps2-3.0.3-020716`); a source picks its profile with a `/* profile: NAME */` first line.
+The compiler, Metrowerks CodeWarrior for PS2 ("MW MIPS C Compiler (2.4.1.01)" in the executable, written by both the 2.4 and the 3.0.x builds), is commercial. `tools/setup.sh` fetches decomp.me's compiler kits into `tools/mwcc/<kit>/` for local use; they are never committed. Compiler flags live in `config/mwcc_profiles.txt`: most units match kit `mwcps2-3.0.3-020716`, others the 3.0 or 3.0.1 builds (see [discoveries](docs/discoveries.md)); a source picks its profile with a `/* profile: NAME */` first line.
 
 ## Matching a function
 ```sh

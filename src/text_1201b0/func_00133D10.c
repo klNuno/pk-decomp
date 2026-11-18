@@ -9,7 +9,7 @@ typedef struct {
 } unk_func_00133D10_0;
 
 void func_00133DC0();
-void func_00161420();
+void HMU_fn_vFree();
 
 void func_00133D10(unk_func_00133D10_0 **arg0) {
     s16 i;
@@ -17,8 +17,8 @@ void func_00133D10(unk_func_00133D10_0 **arg0) {
     for (i = 0; i < (*arg0)->unk_4; i++) {
         func_00133DC0(&(*arg0)->unk_C[i]);
     }
-    func_00161420(&(*arg0)->unk_8, 1);
-    func_00161420(&(*arg0)->unk_C, 1);
-    func_00161420(arg0, 1);
-    func_00161420(&arg0, 1);
+    HMU_fn_vFree(&(*arg0)->unk_8, 1);
+    HMU_fn_vFree(&(*arg0)->unk_C, 1);
+    HMU_fn_vFree(arg0, 1);
+    HMU_fn_vFree(&arg0, 1);
 }

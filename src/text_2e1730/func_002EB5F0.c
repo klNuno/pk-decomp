@@ -1,7 +1,7 @@
 #include "common.h"
 
-void func_002EB9E0();
+void fs_roGetInst__Q24usnd13CEventResTypeFv();
 
 void func_002EB5F0(void) {
-    func_002EB9E0();
+    fs_roGetInst__Q24usnd13CEventResTypeFv();
 }

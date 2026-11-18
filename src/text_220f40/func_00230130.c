@@ -1,9 +1,9 @@
 /* profile: o0_301 */
 #include "common.h"
 
-s32 func_00208D80(s32);
-void func_00222F90(s32, s32, s32 *);
-s32 func_001EBBD0();
+s32 fn_ucGetProcedureUltraOperator(s32);
+void fn_vGetUltraOperatorPerso(s32, s32, s32 *);
+s32 fn_p_stEvalTree();
 s32 func_001C2550();
 void func_0019A2C0(s32, s32);
 extern s32 D_00360178;
@@ -18,10 +18,10 @@ s32 func_00230130(s32 arg0, s32 arg1) {
     s32 temp7;
 
     temp2 = ((s32 *)arg1)[-2];
-    func_00222F90(func_00208D80(temp2), arg0, &temp7);
-    arg1 = func_001EBBD0(arg0, arg1, temp);
+    fn_vGetUltraOperatorPerso(fn_ucGetProcedureUltraOperator(temp2), arg0, &temp7);
+    arg1 = fn_p_stEvalTree(arg0, arg1, temp);
     temp3 = temp[0];
-    arg1 = func_001EBBD0(arg0, arg1, temp);
+    arg1 = fn_p_stEvalTree(arg0, arg1, temp);
     temp4 = temp[0];
     D_00360178 = temp7;
     temp5 = func_001C2550(temp7);

@@ -1,11 +1,14 @@
 # CodeWarrior PS2 profiles: name, decomp.me kit (tools/mwcc/<kit>/), flags. tools/cc.py reads this;
 # a source picks one with /* profile: NAME */ in its first five lines, "opt" by default.
 # Kit chosen by calibration: 0x2BC5F0 inlines (int)float as trunc.w.s, which only 3.0.3 emits.
-# Some units were built with older kits: opt_300 fills delay slots that 3.0.3 leaves empty, o0_301
-# emits register argument moves twice.
+# Some units were built with older kits: opt_300 fills delay slots that 3.0.3 leaves empty and pads
+# short loops to 8 instructions (3.0.3: 7); o0_301 emits register argument moves twice. opt_nodf:
+# units built with dividefix off (no nops after div.s).
 opt   mwcps2-3.0.3-020716  -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
 o0    mwcps2-3.0.3-020716  -c -g -O0 -farcall off -sdatathreshold 8
 o0_301 mwcps2-3.0.1-020123  -c -g -O0 -farcall off -sdatathreshold 8
 o1     mwcps2-3.0.3-020716  -c -g -O1 -farcall off -sdatathreshold 8
 o2     mwcps2-3.0.3-020716  -c -g -O2 -farcall off -sdatathreshold 8
 opt_300 mwcps2-3.0-011126  -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
+opt_301 mwcps2-3.0.1-020123 -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix on" -inline deferred -O3,p
+opt_nodf mwcps2-3.0.3-020716 -c -g -opt level=3 -farcall off -sdatathreshold 8 -pragma "dividefix off" -inline deferred -O3,p
