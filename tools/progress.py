@@ -49,6 +49,10 @@ def c_levels():
         code = re.sub(r"/\*.*?\*/|//[^\n]*", " ", text, flags=re.S)
         for name in re.findall(r"^[^\s#/][^;]*?\b(\w+)\s*\([^;]*?\)\s*\{", code, re.M):
             lv[name] = "c" if name.startswith("func_") or UNREAD.search(code.replace(name, "")) else "read"
+        # The file is named after the function it matches: a C++ method (Class::name in the
+        # source) is only found under its mangled name this way.
+        stem = os.path.splitext(os.path.basename(path))[0]
+        lv.setdefault(stem, "c" if UNREAD.search(code) else "read")
     return lv
 
 
