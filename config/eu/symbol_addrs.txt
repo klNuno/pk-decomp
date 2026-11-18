@@ -214,3 +214,5 @@ __register_global_object = 0x305020; // type:func  gc 8001C8A0, callee 2/2 of fs
 __dt__Q23std13bad_exceptionFv = 0x305410; // type:func  gc 8001DF98, entry 0/2 of the function table D_0035ED80, as on GameCube
 what__Q23std13bad_exceptionCFv = 0x305470; // type:func  gc 8001EBAC, same strings
 func_00305A90 = 0x305A90; // type:func  separate function after the nop padding of func_00305A70, reached by j from 0x305AA0
+func_002EBBC0 = 0x2EBBC0; // type:func  separate function after the tail jump of func_002EBBA0
+func_002EBC20 = 0x2EBC20; // type:func  separate function after the tail jump of func_002EBC10
