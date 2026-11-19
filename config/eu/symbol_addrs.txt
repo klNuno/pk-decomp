@@ -218,3 +218,4 @@ func_002EBBC0 = 0x2EBBC0; // type:func  separate function after the tail jump of
 func_002EBC20 = 0x2EBC20; // type:func  separate function after the tail jump of func_002EBC10
 func_002EC970 = 0x2EC970; // type:func  separate function after the tail jump of func_002EC950
 func_002ED3C0 = 0x2ED3C0; // type:func  separate function after the tail jump of func_002ED390
+__floatdisf = 0x1241E8; // type:func  s64-to-float runtime, MWCC emits this call for an (f32) cast of an s64 and the game calls 0x1241E8 at those sites
