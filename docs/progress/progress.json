@@ -3,10 +3,10 @@
  "bytes": 2203184,
  "game_functions": 6550,
  "game_bytes": 1984640,
- "c_functions": 5661,
- "c_bytes": 1148300,
+ "c_functions": 5666,
+ "c_bytes": 1149916,
  "read_functions": 0,
- "c_percent_bytes": 57.86,
- "c_percent_functions": 86.43,
+ "c_percent_bytes": 57.94,
+ "c_percent_functions": 86.5,
  "library_functions": 1212
 }
