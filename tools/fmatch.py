@@ -31,7 +31,9 @@ import link  # noqa: E402
 REGION = os.environ.get("REGION", "eu")
 EXE = {"eu": "SLES_507.73", "us": "SLUS_204.78"}[REGION]
 VRAM, FILEOFF = 0x100000, 0x80
-BIN = os.path.join(ROOT, "tools/bin")
+# MIPS binutils: the tools/bin wrappers setup.sh installs, else the system's (as the Makefile does).
+_WRAP = os.path.join(ROOT, "tools/bin")
+CROSS = os.path.join(_WRAP, "mipsel-linux-gnu-") if os.access(os.path.join(_WRAP, "mipsel-linux-gnu-as"), os.X_OK) else "mipsel-linux-gnu-"
 GP = 0x367370
 
 
@@ -158,7 +160,7 @@ def cmd_m2c(a):
 def disasm(data, addr, names):
     path = os.path.join(ROOT, "build/fmatch", f"_dis.{os.getpid()}.bin")
     open(path, "wb").write(data)
-    r = run([f"{BIN}/mipsel-linux-gnu-objdump", "-D", "-b", "binary", "-m", "mips:5900", "-EL",
+    r = run([f"{CROSS}objdump", "-D", "-b", "binary", "-m", "mips:5900", "-EL",
              f"--adjust-vma=0x{addr:X}", path])
     os.remove(path)
     rows = []
@@ -213,20 +215,20 @@ def cmd_diff(a):
     script = os.path.join(work, "link.ld")
     open(script, "w").write("\n".join(ld) + "\n")
     elf, out = os.path.join(work, "base.elf"), os.path.join(work, "base.bin")
-    r = run([f"{BIN}/mipsel-linux-gnu-ld", "-nostdlib", "--no-check-sections", "-T", script, "-o", elf, obj])
+    r = run([f"{CROSS}ld", "-nostdlib", "--no-check-sections", "-T", script, "-o", elf, obj])
     if r.returncode:
         print("LINK ERROR\n" + r.stderr.strip())
         if "GPREL16" in r.stderr:
             print("hint: the retail reaches that symbol with %hi/%lo, not $gp: an extern of 8 bytes or less is "
                   "small data for -sdatathreshold 8; declare it as an array (extern T x[];) or inside a struct")
         return 2
-    run([f"{BIN}/mipsel-linux-gnu-objcopy", "-O", "binary", "--only-section=.text", elf, out])
+    run([f"{CROSS}objcopy", "-O", "binary", "--only-section=.text", elf, out])
     mine = open(out, "rb").read()
     target = retail(addr, size)
     pad = target[len(mine):]
     if table:
         tout = os.path.join(work, "table.bin")
-        run([f"{BIN}/mipsel-linux-gnu-objcopy", "-O", "binary", "--only-section=.rodata", elf, tout])
+        run([f"{CROSS}objcopy", "-O", "binary", "--only-section=.rodata", elf, tout])
         if open(tout, "rb").read() != retail(table[0], table[1]):
             print(f"jump table at 0x{table[0]:X} differs from the retail one (case order or count)")
             if mine == target[:len(mine)] and not any(pad):

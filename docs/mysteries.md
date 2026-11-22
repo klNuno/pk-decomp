@@ -1,18 +1,21 @@
 # Open questions
 
-Questions about how the game works that the community has not settled and that the code, the data or an emulator can answer. A checked box is answered. What the community already believes, with sources: [community-knowledge.md](community-knowledge.md).
+Unresolved questions about the retail builds, game rules and unused content. [Community findings](community-knowledge.md)
 
 ## Versions
-- [ ] 1. What else differs between NTSC 1.00 and PAL 1.01, besides the enemy death sounds? TCRF marks the section as needing investigation; a function-by-function diff of the two executables answers it.
-- [ ] 2. Where is the "hidden development-related text" TCRF tags the game with? The May 2002 prototype carries a build stamp, debug messages and dev menus; which of them survive in retail?
-- [ ] 3. Do the prototype's level select, R1+R2 menu and L2+R2 graphics menu survive in retail code, and what turns them on?
+
+- What differs between the North American and European executables beyond the reported enemy death sounds?
+- Where in the retail builds is the development text flagged by The Cutting Room Floor?
+- Which prototype debug menus survive in retail, and how can they be opened?
 
 ## Game rules
-- [ ] 4. Is the 40-scientist gate a single counter check, and what exactly counts (rescued only, per level, replays)?
-- [ ] 5. Does the cheat mode exist in the code: which input sequence, which window (while being shot, at death), and in which versions?
-- [ ] 6. What does the scientist timer measure, and what happens to a scientist "teleported away"?
 
-## Content
-- [ ] 7. Which `M_*.HXD` music orders are never played, and which level or event was each written for (Area 52 first)?
-- [ ] 8. Are there unused levels, objects or texts in the level files or the executable (the prototype's level list against retail)?
-- [ ] 9. Why does the PS2 data keep music parts the GameCube version dropped: cut late, or never wired?
+- How does the game count scientists towards the Mothership unlock? Do rescues on replays count?
+- Does the reported cheat exist? Which versions accept it, and when must the buttons be pressed?
+- When does a scientist's rescue timer start, and what changes in the game state when it runs out?
+
+## Unused content
+
+- Which `M_*.HXD` playback orders go unused, and which levels or events were they written for?
+- Which levels, objects or texts can be found in the data without appearing during play?
+- Do PS2 levels or events reference the music parts absent from the GameCube files?
