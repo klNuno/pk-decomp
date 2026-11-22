@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Compile one C or C++ file with CodeWarrior PS2 the way the build does, then prepare the object for the link.
 
   tools/cc.py SRC OBJ [--profile NAME] [--extra "FLAGS"] [--allow-data]

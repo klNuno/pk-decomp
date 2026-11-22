@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 """GameCube cross-reference: name PS2 functions from the GameCube build's RM_DLL.elf.
 
   gcxref.py syms  <RM_DLL.elf> <out.tsv>           symbol table (addr size type bind section name demangled)

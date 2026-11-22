@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 """GameCube disc image reader: header, file system table (FST), file listing and extraction.
 
   gcdisc.py info <image.iso>                     disc header fields

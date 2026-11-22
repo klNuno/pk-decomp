@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Integrate matched functions: copy each C or C++ file to src/<chunk>/<func>.c(pp), then `make check`.
 
   tools/integrate.py FILE.c... [--jobs 3] [--pause PGID]

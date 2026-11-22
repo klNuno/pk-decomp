@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Mechanical first pass: m2c drafts that already match, written straight into src/.
 
   tools/autopass.py LIST [--jobs 3] [--profiles opt,o0] [--out src] [--log FILE]

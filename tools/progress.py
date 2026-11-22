@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Progress of the decomp and its map.
 
   tools/progress.py [--json] [--map docs/progress]

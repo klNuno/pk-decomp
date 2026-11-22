@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Write the link inputs for the current mix of C and assembly.
 
   tools/link.py REGION C_OBJECTS...

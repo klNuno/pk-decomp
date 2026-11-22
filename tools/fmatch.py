@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Match one function in isolation, built exactly like the game (tools/cc.py, config/mwcc_profiles.txt).
 
   tools/fmatch.py diff FUNC FILE.c [--profile NAME] [--extra "FLAGS"] [--all]

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
 # Install the pinned decomp toolchain into tools/ and .venv/. Safe to re-run, also after the
 # checkout moves: nothing here records an absolute path.
 #   tools/setup.sh          install, verified against tools/toolchain.sha256 and tools/requirements.lock

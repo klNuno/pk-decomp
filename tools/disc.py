@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 """Disc helper: raw CD image to ISO9660, file extraction, and the retail executable's load segment.
 
   disc.py iso  <image.bin> <out.iso>      MODE2/2352 or MODE1/2352 track to 2048-byte sectors

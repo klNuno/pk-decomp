@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 """Give functions their names: add them to config/<region>/symbol_addrs.txt and rename them in src/.
 
   tools/names.py apply PROPOSALS.tsv [--confidence high] [--medium-kinds table,selfname] [--region eu] [--dry-run]
